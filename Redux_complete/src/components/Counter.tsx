@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../state/store";
+import type { RootState,AppDispatch } from "../state/store";
 import {
   decrement,
   increment,
-  increamentByAmount,
+    increamentByAmount,
+  incrementAsync
 } from "../state/counter/counterSlice";
 import { useState } from "react";
 
 const Counter = () => {
-const [amount ,setAmount] = useState(0)
+const [amount ,setAmount] = useState(0) 
 
   const count = useSelector((state: RootState) => state.counter.value);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>(); 
     console.log("insie Counter");
 
   return (
@@ -37,6 +38,20 @@ const [amount ,setAmount] = useState(0)
                 }
             }
             >Increment by Amount</button>
+        
+            </div>
+    
+  
+          <div>
+              
+          <button onClick={
+              () => {
+                  
+                  dispatch(incrementAsync(amount))
+                  
+                }
+            }
+            >Increment async</button>
         
             </div>
               
